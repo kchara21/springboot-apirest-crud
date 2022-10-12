@@ -20,6 +20,8 @@ public class PublicationController {
     @Autowired
     private PublicationService publicationService;
 
+    //  Lista las publicaciones con paginacion y puede ordenar segun el campo detallado de forma ascendente o descendente el arreglo de objetos
+    // RequestParam: pageNumber, pageSize, sortBy, sortDir
     @GetMapping
     public PublicationResponse listPublications(@RequestParam(value = "pageNumber",defaultValue = AppConstants.DEFAULT_NUMBER_PAGE,required = false) int pageNumber,
                                                 @RequestParam(value = "pageSize",defaultValue = AppConstants.DEFAULT_SIZE_PAGE,required = false) int pageSize,
@@ -29,24 +31,32 @@ public class PublicationController {
         return publicationService.listAllPublications(pageNumber,pageSize,sortBy,sortDir);
     }
 
+
+    // Lista una publicacion por Id,
+    // PathVariable: id
     @GetMapping("/{id}")
     public ResponseEntity<PublicationDTO> listOnePublicationById(@PathVariable(name = "id") long id){
         return ResponseEntity.ok(publicationService.listOnePublicationById(id));
     }
 
 
+    // Guarda una publicacion recibiendo en la RequestBody el cuerpo de la entidad "Publicacion"
     @PostMapping
     public ResponseEntity<PublicationDTO> savePublication(@Valid @RequestBody PublicationDTO publicationDTO){
         return new ResponseEntity<>(publicationService.createPublication(publicationDTO), HttpStatus.CREATED);
     }
 
 
+    // Actualiza una publicacion recibiendo en la RequestBody el cuerpo de la entidad "Publicacion".
+    // PathVariable: id
     @PutMapping("/{id}")
     public ResponseEntity<PublicationDTO> updatePublication(@Valid @RequestBody PublicationDTO publicationDTO,@PathVariable(name = "id") long id){
         PublicationDTO publicationResponse = publicationService.updatePublication(publicationDTO,id);
         return new ResponseEntity<>(publicationResponse, HttpStatus.OK);
     }
 
+    // Remueve una publicacion por id.
+    // PathVariable: publicationId, id
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePublication(@PathVariable(name = "id") long id){
         publicationService.deletePublication(id);

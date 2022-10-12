@@ -22,11 +22,15 @@ public class ComentController {
     @Autowired
     private ComentService comentService;
 
+    // Lista Comentarios por el id de la publicacion.
+    // PathVariable: publicationId
     @GetMapping("/publications/{publicationId}/coments")
     public List<ComentDTO> listComentsByPublicationId(@PathVariable(value = "publicationId") Long publicationId) {
         return comentService.listAllComentsByPublicationId(publicationId);
     }
 
+    // Lista un comentario por su id, y por el id de la publicacion.
+    // PathVariable: publicationId, id
     @GetMapping("/publications/{publicationId}/coments/{id}")
     public ResponseEntity<ComentDTO> listComentById(@PathVariable(value = "publicationId") Long publicationId,
                                                     @PathVariable(value = "id") Long comentId) {
@@ -35,12 +39,16 @@ public class ComentController {
     }
 
 
+    // Guarda un comentario recibiendo en la RequestBody el cuerpo de la entidad "Comentario"
+    // PathVariable: publicationId
     @PostMapping("/publications/{publicationId}/coments")
     public ResponseEntity<ComentDTO> saveComent(@PathVariable(value = "publicationId") long publicationId,
                                                 @Valid @RequestBody ComentDTO comentDTO) {
         return new ResponseEntity<>(comentService.createComent(publicationId, comentDTO), HttpStatus.OK);
     }
 
+    // Actualiza un comentario recibiendo en la RequestBody el cuerpo de la entidad "Comentario".
+    // PathVariable: publicationId, id
     @PutMapping("/publications/{publicationId}/coments/{id}")
     public ResponseEntity<ComentDTO> updateComent(@PathVariable(value = "publicationId") Long publicationId,
                                                   @PathVariable(value = "id") Long comentId,
@@ -50,6 +58,8 @@ public class ComentController {
 
     }
 
+    // Remueve un comentario por id.
+    // PathVariable: publicationId, id
     @DeleteMapping("/publications/{publicationId}/coments/{id}")
     public ResponseEntity<String> deleteComent(@PathVariable(value = "publicationId") Long publicationId,
                                                @PathVariable(value = "id") Long comentId) {
