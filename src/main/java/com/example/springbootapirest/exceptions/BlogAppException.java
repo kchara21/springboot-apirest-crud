@@ -2,12 +2,14 @@ package com.example.springbootapirest.exceptions;
 
 import org.springframework.http.HttpStatus;
 
+// Clase que sirve para devolver una estructura personalizada para las excepciones.
 public class BlogAppException extends RuntimeException{
     private static final long serialVersionUID = 1l;
 
     private HttpStatus estate;
     private String message;
 
+    // Metodo que devuelve el estado y el mensaje de la excepcion.
     public BlogAppException(HttpStatus estate, String message) {
         super();
         this.estate = estate;

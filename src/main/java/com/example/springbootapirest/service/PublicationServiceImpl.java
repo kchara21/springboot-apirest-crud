@@ -19,9 +19,11 @@ import java.util.stream.Collectors;
 @Service
 public class PublicationServiceImpl implements PublicationService{
 
+    // Inyeccion del repositorio publicationRepository
     @Autowired
     private PublicationRepository publicationRepository;
 
+    // Inyeccion de ModelMapper para la el mapeo de las entidades/dto
     @Autowired
     private ModelMapper modelMapper;
 

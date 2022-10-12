@@ -18,12 +18,15 @@ import java.util.stream.Collectors;
 @Service
 public class ComentServiceImpl implements ComentService{
 
+    // Inyeccion del repositorio comentRepository
     @Autowired
     private ComentRepository comentRepository;
 
+    // Inyeccion del repositorio publicationRepository
     @Autowired
     private PublicationRepository publicationRepository;
 
+    // Inyeccion de ModelMapper para la el mapeo de las entidades/dto
     @Autowired
     private ModelMapper modelMapper;
 

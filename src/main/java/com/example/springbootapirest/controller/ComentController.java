@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+
+// Controlador para la gestion de Comentarios
 @RestController()
 @RequestMapping("/api/")
 public class ComentController {
 
+    // Inyeccion del servicio comentService,
     @Autowired
     private ComentService comentService;
 

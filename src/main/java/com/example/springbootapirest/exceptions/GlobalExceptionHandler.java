@@ -15,9 +15,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+
+// Clase Global de excepciones que gestiona la respuesta.
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
+    // Metodo que utiliza la clase ResourceNotFoundException para retornar una respuesta estructurada para el tipo HttpStatus.NOT_FOUND
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ErrorDetails>
     manageResourceNotFoundException(ResourceNotFoundException exception,
@@ -30,6 +33,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 
+    // Metodo que utiliza la clase BlogAppException para retornar una respuesta estructurada para el tipo HttpStatus.BAD_REQUEST
     @ExceptionHandler(BlogAppException.class)
     public ResponseEntity<ErrorDetails>
     manageBlogAppException(BlogAppException exception,
@@ -43,6 +47,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
 
+    // Metodo que utiliza la clase Exception para retornar una respuesta estructurada para el tipo HttpStatus.INTERNAL_SERVER_ERROR
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorDetails>
     manageGlobalException(Exception exception,
@@ -55,6 +60,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    // Metodo que devuelve un mensaje segun en caso de no cumplir las restricciones de las propiedades de la Entidad (Comentario/Publicacion).
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
 
